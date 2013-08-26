@@ -1,4 +1,3 @@
-skarabee-PHP-API
-================
+# Skarabee PHP API class
 
-This Skarabee PHP API class connects with the Skarabee API called Weblink.
+This Skarabee PHP API class connects with the Skarabee SOAP API, called Weblink.
