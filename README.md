@@ -1,6 +1,6 @@
 # Skarabee PHP API class
 
-This Skarabee PHP API class connects with the [Skarabee SOAP API](http://www.skarabee.be), called Weblink.
+This Skarabee PHP API class connects with the [Skarabee SOAP API, called Weblink](http://weblink.skarabee.com/weblink.asmx?wsdl). More information about [Skarabee](http://www.skarabee.be).
 
 ## Work in progress
 
