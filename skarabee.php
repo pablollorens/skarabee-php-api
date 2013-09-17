@@ -6,11 +6,6 @@
  * Connects to the Skarabee SOAP API, called Weblink.
  *
  * @author Jeroen Desloovere <jeroen@siesqo.be>
- * @date 2013-07-19
- * @version 1.0.0
- *
- * @copyright Copyright (c) 2013, Jeroen Desloovere. All rights reserved.
- * @license BSD License
  */
 class Skarabee
 {
