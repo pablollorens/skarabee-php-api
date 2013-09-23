@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Skarabee API
+ * Skarabee
  *
- * Connects to the Skarabee SOAP API, called Weblink.
+ * This Skarabee PHP Wrapper class connects to the Skarabee SOAP API, called Weblink.
  *
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
@@ -59,13 +59,18 @@ class Skarabee
 
 		// build parameters
 		$parameters['PublicationID'] = $item['publication_id'];
+		$parameters['ExternalReference'] = $item['external_reference'];
 		$parameters['FirstName'] = $item['first_name'];
 		$parameters['LastName'] = $item['last_name'];
-		$parameters['City'] = $item['city'];
-		$parameters['CellPhone'] = $item['sell_phone'];
+		$parameters['CellPhone'] = $item['cell_phone'];
 		$parameters['Phone'] = $item['phone'];
 		$parameters['Email'] = $item['email'];
 		$parameters['Comments'] = $item['comments'];
+		$parameters['Street'] = $item['street'];
+		$parameters['HouseNumber'] = $item['house_number'];
+		$parameters['HouseNumberExtension'] = $item['house_number_extension'];
+		$parameters['ZipCode'] = $item['zip'];
+		$parameters['City'] = $item['city'];
 
 		// return call
 		return $this->doCall('InsertContactMes', $parameters);
@@ -220,6 +225,4 @@ class Skarabee
  *
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
-class SkarabeeException extends Exception
-{
-}
+class SkarabeeException extends Exception {}
