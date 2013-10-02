@@ -6,8 +6,8 @@ This Skarabee PHP class connects with the [Skarabee SOAP API, called Weblink](ht
 
 All functions in this class works,
 but the following two functions are untested:
-- [ ] Skarabee::addContactMessage
-- [ ] Skarabee::pingBack
+- [ ] [Skarabee::addContactMessage](https://github.com/deslooverej/skarabee-php-api/issues/1)
+- [ ] [Skarabee::pingBack](https://github.com/deslooverej/skarabee-php-api/issues/2)
 
 ## Documentation
 
