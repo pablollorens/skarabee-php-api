@@ -60,17 +60,17 @@ class Skarabee
 		// build parameters
 		$parameters['PublicationID'] = $item['publication_id'];
 		$parameters['ExternalReference'] = $item['external_reference'];
-		$parameters['FirstName'] = $item['first_name'];
-		$parameters['LastName'] = $item['last_name'];
-		$parameters['CellPhone'] = $item['cell_phone'];
-		$parameters['Phone'] = $item['phone'];
-		$parameters['Email'] = $item['email'];
-		$parameters['Comments'] = $item['comments'];
-		$parameters['Street'] = $item['street'];
-		$parameters['HouseNumber'] = $item['house_number'];
-		$parameters['HouseNumberExtension'] = $item['house_number_extension'];
-		$parameters['ZipCode'] = $item['zip'];
-		$parameters['City'] = $item['city'];
+		if(isset($item['first_name'])) $parameters['FirstName'] = $item['first_name'];
+		if(isset($item['last_name'])) $parameters['LastName'] = $item['last_name'];
+		if(isset($item['cell_phone'])) $parameters['CellPhone'] = $item['cell_phone'];
+		if(isset($item['phone'])) $parameters['Phone'] = $item['phone'];
+		if(isset($item['email'])) $parameters['Email'] = $item['email'];
+		if(isset($item['comments'])) $parameters['Comments'] = $item['comments'];
+		if(isset($item['street'])) $parameters['Street'] = $item['street'];
+		if(isset($item['house_number'])) $parameters['HouseNumber'] = $item['house_number'];
+		if(isset($item['house_number_extension'])) $parameters['HouseNumberExtension'] = $item['house_number_extension'];
+		if(isset($item['zip'])) $parameters['ZipCode'] = $item['zip'];
+		if(isset($item['city'])) $parameters['City'] = $item['city'];
 
 		// return call
 		return $this->doCall('InsertContactMes', $parameters);
