@@ -17,21 +17,21 @@ class Skarabee
 	 *
 	 * @var string
 	 */
-	private $password;
+	protected $password;
 
 	/**
 	 * Username
 	 *
 	 * @var string
 	 */
-	private $username;
+	protected $username;
 
 	/**
 	 * The instance of the SOAP client
 	 *
 	 * @var SoapClient
 	 */
-	private $instance;
+	protected $instance;
 
 	/**
 	 * Construct the Skarabee API
