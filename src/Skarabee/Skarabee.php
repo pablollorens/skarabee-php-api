@@ -83,7 +83,7 @@ class Skarabee
 	 * @param string $parameters
 	 * @return SoapClient
 	 */
-	private function doCall($method, $parameters)
+	private function doCall($method, $parameters = array())
 	{
 		// first time we call SoapClient
 		if(!$this->instance)
