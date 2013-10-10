@@ -181,6 +181,22 @@ class Skarabee
 	}
 
 	/**
+	 * Get contact info
+	 *
+	 * @return array(Id, Username, Company, Reference, Contact => array(
+	 *		Email, Website, Phone, Fax, Street, HouseNumber, HouseNumberExtension, ZipCode, City, Country)
+	 *	)
+	 */
+	public function getContactInfo()
+	{
+		// define results
+		$results = $this->doCall('GetContactInfo');
+
+		// return item
+		return $results['UserSummaries']['UserSummary'];
+	}
+
+	/**
 	 * Ping to Skarabee.
 	 *
 	 * @todo Verify if it works.
