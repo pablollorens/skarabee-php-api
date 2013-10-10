@@ -193,7 +193,7 @@ class Skarabee
 		$results = $this->doCall('GetContactInfo');
 
 		// return item
-		return $results['UserSummaries']['UserSummary'];
+		return (isset($results['UserSummaries']['UserSummary'])) ? $results['UserSummaries']['UserSummary'] : array();
 	}
 
 	/**
