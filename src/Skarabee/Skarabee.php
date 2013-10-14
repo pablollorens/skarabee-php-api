@@ -66,7 +66,7 @@ class Skarabee
 
 		// build parameters
 		$parameters['Comments'] = (string) $item['comments'];
-		if(isset($item['publication_id'])) $parameters['PublicationID'] = (string) $item['publication_id'];
+		if(isset($item['publication_id'])) $parameters['PublicationID'] = (int) $item['publication_id'];
 		if(isset($item['external_reference'])) $parameters['ExternalReference'] = (string) $item['external_reference'];
 		if(isset($item['first_name'])) $parameters['FirstName'] = (string) $item['first_name'];
 		if(isset($item['last_name'])) $parameters['LastName'] = (string) $item['last_name'];
@@ -74,7 +74,7 @@ class Skarabee
 		if(isset($item['phone'])) $parameters['Phone'] = (string) $item['phone'];
 		if(isset($item['email'])) $parameters['Email'] = (string) $item['email'];
 		if(isset($item['street'])) $parameters['Street'] = (string) $item['street'];
-		if(isset($item['house_number'])) $parameters['HouseNumber'] = (string) $item['house_number'];
+		if(isset($item['house_number'])) $parameters['HouseNumber'] = (int) $item['house_number'];
 		if(isset($item['house_number_extension'])) $parameters['HouseNumberExtension'] = (string) $item['house_number_extension'];
 		if(isset($item['zip'])) $parameters['ZipCode'] = (string) $item['zip'];
 		if(isset($item['city'])) $parameters['City'] = (string) $item['city'];
