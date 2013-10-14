@@ -18,11 +18,21 @@ $password = '';
 // init api
 $api = new Skarabee($username, $password);
 
+// get publication
+//$items = $api->get($publicationID);
+
+// get all publications
+//$items = $api->getAll();
+
+// get all projects
+//$items = $api->getAllProjects();
+
 // insert
 $item = array(
 	'comments' => 'dit is een test van Reclamebureau Siesqo',
 	'first_name' => 'jeroen',
-	'last_name' => 'desloovere'	
+	'last_name' => 'desloovere',
+	'phone' => '000000000'
 );
 
 print_r($api->addContactMessage($item));
