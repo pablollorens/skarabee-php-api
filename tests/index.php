@@ -27,6 +27,9 @@ $api = new Skarabee($username, $password);
 // get all projects
 //$items = $api->getAllProjects();
 
+// get contact info
+//$item = $api->getContactInfo();
+
 // insert
 $item = array(
 	'comments' => 'dit is een test van Reclamebureau Siesqo',
