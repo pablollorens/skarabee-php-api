@@ -124,7 +124,6 @@ class Skarabee
 			// throw error
 			if(!$exists)
 			{
-				echo 'Field is required: ' . $field;
 				throw new SkarabeeException('Field is required: ' . $field);
 			}
 		}	
