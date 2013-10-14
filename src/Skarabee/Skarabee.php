@@ -57,6 +57,14 @@ class Skarabee
 		// init parameters
 		$parameters = array();
 
+		// define required fields
+		$requiredFields = array(
+			'comments', 'first_name', 'last_name', array('phone', 'cell_phone', 'email')
+		);
+
+		// check if fields are set
+		$this->checkFields($item, $requiredFields);
+
 		// build parameters
 		$parameters['Comments'] = (string) $item['comments'];
 		if(isset($item['publication_id'])) $parameters['PublicationID'] = (string) $item['publication_id'];
@@ -77,13 +85,60 @@ class Skarabee
 	}
 
 	/**
+	 * Check fields if they are set
+	 *
+	 * @param array $item
+	 * @param array $requiredFields
+	 */
+	protected function checkFields($item, $requiredFields)
+	{
+		// loop required fields
+		foreach($requiredFields as $field)
+		{
+			// init exists
+			$exists = false;
+
+			// one of multiple fields required
+			if(is_array($field))
+			{
+				// loop all fields
+				foreach($field as $arrayField)
+				{
+					// field exists in loop
+					if(isset($item[$arrayField]))
+					{
+						// redefine exists
+						$exists = true;
+
+						// skip other fields in loop
+						break;	
+					}
+				}
+
+				// make them inline
+				if(!$exists) $field = 'one of "' . implode(', ', $field) . '"';
+			}
+
+			// define is exists or not
+			else $exists = isset($item[$field]);
+
+			// throw error
+			if(!$exists)
+			{
+				echo 'Field is required: ' . $field;
+				throw new SkarabeeException('Field is required: ' . $field);
+			}
+		}	
+	}
+
+	/**
 	 * Call a certain method with its parameters
 	 *
 	 * @param string $method
 	 * @param string $parameters
 	 * @return SoapClient
 	 */
-	private function doCall($method, $parameters = array())
+	protected function doCall($method, $parameters = array())
 	{
 		// first time we call SoapClient
 		if(!$this->instance)
@@ -111,7 +166,7 @@ class Skarabee
 
 		// define result
 		$result = $this->instance->$method($parameters)->$resultMethod;
-print_r($result);
+
 		// return results from called method
 		return json_decode(json_encode($result), true);
 	}
