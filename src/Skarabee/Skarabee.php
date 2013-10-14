@@ -47,9 +47,8 @@ class Skarabee
 	}
 
 	/**
-	 * Add contact message
+	 * Add contact message - Attention: 20 minutes delay on server
 	 *
-	 * @todo Verify if it works.
 	 * @param array $item
 	 */
 	public function addContactMessage($item)
