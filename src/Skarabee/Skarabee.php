@@ -58,14 +58,14 @@ class Skarabee
 		$parameters = array();
 
 		// build parameters
-		$parameters['PublicationID'] = $item['publication_id'];
-		$parameters['ExternalReference'] = $item['external_reference'];
+		$parameters['Comments'] = $item['comments'];
+		if(isset($item['publication_id'])) $parameters['PublicationID'] = $item['publication_id'];
+		if(isset($item['external_reference'])) $parameters['ExternalReference'] = $item['external_reference'];
 		if(isset($item['first_name'])) $parameters['FirstName'] = $item['first_name'];
 		if(isset($item['last_name'])) $parameters['LastName'] = $item['last_name'];
 		if(isset($item['cell_phone'])) $parameters['CellPhone'] = $item['cell_phone'];
 		if(isset($item['phone'])) $parameters['Phone'] = $item['phone'];
 		if(isset($item['email'])) $parameters['Email'] = $item['email'];
-		if(isset($item['comments'])) $parameters['Comments'] = $item['comments'];
 		if(isset($item['street'])) $parameters['Street'] = $item['street'];
 		if(isset($item['house_number'])) $parameters['HouseNumber'] = $item['house_number'];
 		if(isset($item['house_number_extension'])) $parameters['HouseNumberExtension'] = $item['house_number_extension'];
@@ -109,8 +109,11 @@ class Skarabee
 		// define result method which contains the results
 		$resultMethod = $method . 'Result';
 
+		// define result
+		$result = $this->instance->$method($parameters)->$resultMethod;
+print_r($result);
 		// return results from called method
-		return json_decode(json_encode($this->instance->$method($parameters)->$resultMethod), true);
+		return json_decode(json_encode($result), true);
 	}
 
 	/**
