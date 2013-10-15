@@ -16,7 +16,7 @@ class Skarabee
 	const WSDL_URL = 'http://weblink.skarabee.com/weblink.asmx?wsdl';
 
 	// current version
-	const VERSION = '0.0.9';
+	const VERSION = '1.0.0';
 
 	/**
 	 * The password that will be used for authenticating
