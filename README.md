@@ -2,13 +2,6 @@
 
 This Skarabee PHP class connects with the [Skarabee SOAP API, called Weblink](http://weblink.skarabee.com/weblink.asmx?wsdl). More information about [Skarabee](http://www.skarabee.be).
 
-## Work in progress
-
-All functions in this class works,
-but the following two functions are untested:
-- [ ] [Skarabee::addContactMessage](https://github.com/deslooverej/skarabee-php-api/issues/1)
-- [ ] [Skarabee::pingBack](https://github.com/deslooverej/skarabee-php-api/issues/2)
-
 ## Documentation
 
 The class is well documented inline. If you use a decent IDE you'll see that each method is documented with PHPDoc.
