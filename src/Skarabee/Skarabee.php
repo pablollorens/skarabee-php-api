@@ -9,29 +9,49 @@
  */
 class Skarabee
 {
-	// The URL where you find the .wsdl file
-	const API_URL = 'http://weblink.skarabee.com/weblink.asmx?wsdl';
+	// internal constant to enable/disable debugging
+	const DEBUG = false;
+
+	// the url for the api
+	const WSDL_URL = 'http://weblink.skarabee.com/weblink.asmx?wsdl';
+
+	// current version
+	const VERSION = '0.0.9';
 
 	/**
-	 * Password
+	 * The password that will be used for authenticating
 	 *
 	 * @var string
 	 */
 	protected $password;
 
 	/**
-	 * Username
+	 * The SOAP-client
+	 *
+	 * @var	SoapClient
+	 */
+	protected $soapClient;
+
+	/**
+	 * The timeout
+	 *
+	 * @var	int
+	 */
+	private $timeOut = 60;
+	
+	/**
+	 * User agent
+	 *
+	 * @var string
+	 */
+	protected $userAgent;
+
+	/**
+	 * The username that will be used for authenticating
 	 *
 	 * @var string
 	 */
 	protected $username;
-
-	/**
-	 * The instance of the SOAP client
-	 *
-	 * @var SoapClient
-	 */
-	protected $instance;
 
 	/**
 	 * Construct the Skarabee API
@@ -40,14 +60,14 @@ class Skarabee
 	 * @param string $password
 	 */
 	public function __construct($username, $password)
-	{
+	{		
 		// define variables
 		$this->username = $username;
 		$this->password = $password;
 	}
 
 	/**
-	 * Add contact message - Attention: 20 minutes delay on server
+	 * Add contact message - Attention: delay on server, messages arrive 1 minute after each hour.
 	 *
 	 * @param array $item
 	 */
@@ -65,11 +85,11 @@ class Skarabee
 		$this->checkFields($item, $requiredFields);
 
 		// build parameters
+		$parameters['FirstName'] = (string) $item['first_name'];
+		$parameters['LastName'] = (string) $item['last_name'];
 		$parameters['Comments'] = (string) $item['comments'];
 		if(isset($item['publication_id'])) $parameters['PublicationID'] = (int) $item['publication_id'];
 		if(isset($item['external_reference'])) $parameters['ExternalReference'] = (string) $item['external_reference'];
-		if(isset($item['first_name'])) $parameters['FirstName'] = (string) $item['first_name'];
-		if(isset($item['last_name'])) $parameters['LastName'] = (string) $item['last_name'];
 		if(isset($item['cell_phone'])) $parameters['CellPhone'] = (string) $item['cell_phone'];
 		if(isset($item['phone'])) $parameters['Phone'] = (string) $item['phone'];
 		if(isset($item['email'])) $parameters['Email'] = (string) $item['email'];
@@ -78,6 +98,9 @@ class Skarabee
 		if(isset($item['house_number_extension'])) $parameters['HouseNumberExtension'] = (string) $item['house_number_extension'];
 		if(isset($item['zip'])) $parameters['ZipCode'] = (string) $item['zip'];
 		if(isset($item['city'])) $parameters['City'] = (string) $item['city'];
+
+		// redefine parameters
+		$parameters = array('ContactMes' => $parameters);
 
 		// return call
 		return $this->doCall('InsertContactMes', $parameters);
@@ -139,18 +162,29 @@ class Skarabee
 	protected function doCall($method, $parameters = array())
 	{
 		// first time we call SoapClient
-		if(!$this->instance)
+		if(!$this->soapClient)
 		{
 			try
 			{
+				// throw error
+				if(empty($this->username) && empty($this->password))
+				{
+					throw new SkarabeeException('Username and password are empty.');
+				}
+
 				// define options
 				$options = array(
 					'login' => $this->username,
-					'password' => $this->password
+					'password' => $this->password,
+					'soap_version'   => SOAP_1_1,
+					'trace' => self::DEBUG,
+					'exceptions' => false,
+					'connection_timeout' => $this->getTimeOut(),
+					'user_agent' => $this->getUserAgent()
 				);
 
 				// define SOAP client
-				$this->instance = new SoapClient(self::API_URL, $options);
+				$this->soapClient = new SoapClient(self::WSDL_URL, $options);
 			}
 			catch(Exception $e)
 			{
@@ -163,7 +197,7 @@ class Skarabee
 		$resultMethod = $method . 'Result';
 
 		// define result
-		$result = $this->instance->$method($parameters)->$resultMethod;
+		$result = $this->soapClient->$method($parameters)->$resultMethod;
 
 		// return results from called method
 		return json_decode(json_encode($result), true);
@@ -250,6 +284,51 @@ class Skarabee
 
 		// return item
 		return (isset($results['UserSummaries']['UserSummary'])) ? $results['UserSummaries']['UserSummary'] : array();
+	}
+
+	/**
+	 * Get the timeout that will be used
+	 *
+	 * @return	int
+	 */
+	public function getTimeOut()
+	{
+		return (int) $this->timeOut;
+	}
+
+	/**
+	 * Get the useragent that will be used. Our version will be prepended to yours.
+	 * It will look like: "PHP Skarabee Member/<version> <your-user-agent>"
+	 *
+	 * @return	string
+	 */
+	public function getUserAgent()
+	{
+		return (string) 'PHP Skarabee Member/' . self::VERSION . ' ' . $this->userAgent;
+	}
+
+	/**
+	 * Set the timeout
+	 * After this time the request will stop. You should handle any errors triggered by this.
+	 *
+	 * @return	void
+	 * @param	int $seconds	The timeout in seconds
+	 */
+	public function setTimeOut($seconds)
+	{
+		$this->timeOut = (int) $seconds;
+	}
+	
+	/**
+	 * Set the user-agent for you application
+	 * It will be appended to ours, the result will look like: "PHP Skarabee Member/<version> <your-user-agent>"
+	 *
+	 * @return	void
+	 * @param	string $userAgent	Your user-agent, it should look like <app-name>/<app-version>
+	 */
+	public function setUserAgent($userAgent)
+	{
+		$this->userAgent = (string) $userAgent;
 	}
 
 	/**
