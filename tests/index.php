@@ -22,7 +22,7 @@ $api = new Skarabee($username, $password);
 //$items = $api->get($publicationID);
 
 // get all publications
-//$items = $api->getAll();
+$items = $api->getAll();
 
 // get all projects
 //$items = $api->getAllProjects();
@@ -31,7 +31,7 @@ $api = new Skarabee($username, $password);
 //$item = $api->getContactInfo();
 
 // insert
-$item = array(
+/*$item = array(
 	'comments' => 'dit is een test van Reclamebureau Siesqo',
 	'first_name' => 'jeroen',
 	'last_name' => 'desloovere',
@@ -39,3 +39,6 @@ $item = array(
 );
 
 print_r($api->addContactMessage($item));
+*/
+
+print_r($items);
