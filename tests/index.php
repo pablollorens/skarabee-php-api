@@ -33,7 +33,7 @@ $items = $api->getAll();
 // insert
 /*$item = array(
 	'comments' => 'dit is een test van Reclamebureau Siesqo',
-	'first_name' => 'jeroen',
+	'first_name' => 'jeroen-API',
 	'last_name' => 'desloovere',
 	'phone' => '000000000'
 );
@@ -41,4 +41,9 @@ $items = $api->getAll();
 print_r($api->addContactMessage($item));
 */
 
-print_r($items);
+//print_r($items);
+
+// send feedback
+$result = $api->pingBack(2247560, 'AVAILABLE', 'Dit is een test-feedback', '1', 'http://www.eribo.be');
+
+print_r($result);
