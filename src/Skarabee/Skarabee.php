@@ -355,15 +355,18 @@ class Skarabee
 			throw new SkarabeeException('The given \'status\' : ' . $status . ' is not one of the following values: ' . implode(', ', $values) . '.');
 		}
 
-		// init parameters
-		$parameters = array();
+		// init feedback
+		$feedback = array();
 
 		// define parameters
-		$parameters['PublicationID'] = (int) $id;
-		$parameters['Status'] = $status;
-		$parameters['StatusDescription'] = (string) $statusDescription;
-		$parameters['ExternalID'] = (int) $internalId;
-		$parameters['URL'] = (string) $internalURL;
+		$feedback['PublicationID'] = (int) $id;
+		$feedback['Status'] = $status;
+		$feedback['StatusDescription'] = (string) $statusDescription;
+		$feedback['ExternalID'] = (int) $internalId;
+		$feedback['URL'] = (string) $internalURL;
+
+		// init parameters
+		$parameters['FeedbackList']['FeedbackList']['Feedback'] = $feedback;
 
 		// call feedback
 		return $this->doCall('Feedback', $parameters);
