@@ -35,7 +35,7 @@ class Skarabee
 	/**
 	 * The timeout
 	 *
-	 * @var	int
+	 * @var int
 	 */
 	private $timeOut = 60;
 	
