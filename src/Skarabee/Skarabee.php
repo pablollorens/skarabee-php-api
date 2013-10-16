@@ -84,17 +84,19 @@ class Skarabee
 		// check if fields are set
 		$this->checkFields($item, $requiredFields);
 
-		// build parameters
+		// build required parameters
 		$parameters['FirstName'] = (string) $item['first_name'];
 		$parameters['LastName'] = (string) $item['last_name'];
 		$parameters['Comments'] = (string) $item['comments'];
+		$parameters['Email'] = (string) $item['email'];
+		$parameters['HouseNumber'] = (isset($item['house_number'])) ? (int) $item['house_number'] : '';
+
+		// add optional parameters
 		if(isset($item['publication_id'])) $parameters['PublicationID'] = (int) $item['publication_id'];
 		if(isset($item['external_reference'])) $parameters['ExternalReference'] = (string) $item['external_reference'];
 		if(isset($item['cell_phone'])) $parameters['CellPhone'] = (string) $item['cell_phone'];
 		if(isset($item['phone'])) $parameters['Phone'] = (string) $item['phone'];
-		if(isset($item['email'])) $parameters['Email'] = (string) $item['email'];
 		if(isset($item['street'])) $parameters['Street'] = (string) $item['street'];
-		if(isset($item['house_number'])) $parameters['HouseNumber'] = (int) $item['house_number'];
 		if(isset($item['house_number_extension'])) $parameters['HouseNumberExtension'] = (string) $item['house_number_extension'];
 		if(isset($item['zip'])) $parameters['ZipCode'] = (string) $item['zip'];
 		if(isset($item['city'])) $parameters['City'] = (string) $item['city'];
