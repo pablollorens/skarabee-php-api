@@ -35,7 +35,7 @@ class Skarabee
 	/**
 	 * The timeout
 	 *
-	 * @var int
+	 * @var	int
 	 */
 	private $timeOut = 60;
 	
@@ -246,7 +246,18 @@ class Skarabee
 		$results = $this->doCall('GetPublicationSummaries', $parameters);
 
 		// return items
-		return (isset($results['PublicationSummaries']['PublicationSummary'])) ? $results['PublicationSummaries']['PublicationSummary'] : array();
+		if(isset($results['PublicationSummaries']['PublicationSummary']))
+		{
+			// define return value
+			$return = $results['PublicationSummaries']['PublicationSummary'];
+
+			// we should return array of items, not one item array
+			if(isset($return['ID'])) $return = array($return);
+
+			// return
+			return $return;
+		}
+		else return array();
 	}
 
 	/**
@@ -269,7 +280,18 @@ class Skarabee
 		$results = $this->doCall('GetProjectSummaries', $parameters);
 
 		// return items
-		return (isset($results['ProjectPublicationSummaries']['ProjectPublicationSummary'])) ? $results['ProjectPublicationSummaries']['ProjectPublicationSummary'] : array();
+		if(isset($results['ProjectPublicationSummaries']['ProjectPublicationSummary']))
+		{
+			// define return value
+			$return = $results['ProjectPublicationSummaries']['ProjectPublicationSummary'];
+
+			// we should return array of items, not one item array
+			if(isset($return['ID'])) $return = array($return);
+
+			// return
+			return $return;
+		}
+		else return array();
 	}
 
 	/**
