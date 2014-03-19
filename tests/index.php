@@ -9,7 +9,7 @@
  */
 
 // require
-require_once '../src/Skarabee/Skarabee.php';
+require_once '../src/JeroenDesloovere/Skarabee/Skarabee.php';
 
 // define credentials
 $username = '';

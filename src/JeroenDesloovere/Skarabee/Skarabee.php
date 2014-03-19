@@ -1,5 +1,7 @@
 <?php
 
+namespace JeroenDesloovere\Skarabee;
+
 /**
  * Skarabee
  *
