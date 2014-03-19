@@ -243,6 +243,7 @@ class Skarabee
 
             // return
             return $return;
+		// no items, return empty array
         } else return array();
     }
 
@@ -275,6 +276,7 @@ class Skarabee
 
             // return
             return $return;
+		// no items, return empty array
         } else return array();
     }
 
