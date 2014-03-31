@@ -40,7 +40,7 @@ class Skarabee
      * @var    int
      */
     private $timeOut = 60;
-    
+
     /**
      * User agent
      *
@@ -62,7 +62,7 @@ class Skarabee
      * @param string $password
      */
     public function __construct($username, $password)
-    {        
+    {
         // define variables
         $this->username = $username;
         $this->password = $password;
@@ -133,7 +133,7 @@ class Skarabee
                         $exists = true;
 
                         // skip other fields in loop
-                        break;    
+                        break;
                     }
                 }
 
@@ -146,14 +146,14 @@ class Skarabee
             if (!$exists) {
                 throw new SkarabeeException('Field is required: ' . $field);
             }
-        }    
+        }
     }
 
     /**
      * Call a certain method with its parameters
      *
-     * @param string $method
-     * @param string $parameters
+     * @param  string     $method
+     * @param  string     $parameters
      * @return SoapClient
      */
     protected function doCall($method, $parameters = array())
@@ -179,7 +179,7 @@ class Skarabee
 
                 // define SOAP client
                 $this->soapClient = new SoapClient(self::WSDL_URL, $options);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 // throw error
                 throw new SkarabeeException($e);
             }
@@ -198,7 +198,7 @@ class Skarabee
     /**
      * Get a publication by id.
      *
-     * @param int $id The publication ID.
+     * @param  int   $id The publication ID.
      * @return array
      */
     public function get($id)
@@ -219,9 +219,9 @@ class Skarabee
     /**
      * Get all publications with optional filtering on date or type.
      *
-     * @param string $sinceDate [optional] If no date given, all publications will be returned.
-     * @param mixed $types [optional] If no types are given, all allowed types will be returned.
-     * @return array Returns all changed PublicationID values since date given.
+     * @param  string $sinceDate [optional] If no date given, all publications will be returned.
+     * @param  mixed  $types     [optional] If no types are given, all allowed types will be returned.
+     * @return array  Returns all changed PublicationID values since date given.
      */
     public function getAll($sinceDate = null, $types = null)
     {
@@ -245,16 +245,16 @@ class Skarabee
 
             // return
             return $return;
-		// no items, return empty array
+        // no items, return empty array
         } else return array();
     }
 
     /**
      * Get all projects with optional filtering on date or type.
      *
-     * @param string $sinceDate [optional] If no date given, all publications will be returned.
-     * @param array $types [optional] If no types are given, all allowed types will be returned.
-     * @return array Returns all changed PublicationID values since date given.
+     * @param  string $sinceDate [optional] If no date given, all publications will be returned.
+     * @param  array  $types     [optional] If no types are given, all allowed types will be returned.
+     * @return array  Returns all changed PublicationID values since date given.
      */
     public function getAllProjects($sinceDate = null, $types = null)
     {
@@ -278,7 +278,7 @@ class Skarabee
 
             // return
             return $return;
-		// no items, return empty array
+        // no items, return empty array
         } else return array();
     }
 
@@ -286,8 +286,8 @@ class Skarabee
      * Get contact info
      *
      * @return array(Id, Username, Company, Reference, Contact => array(
-     *        Email, Website, Phone, Fax, Street, HouseNumber, HouseNumberExtension, ZipCode, City, Country)
-     *    )
+     *                   Email, Website, Phone, Fax, Street, HouseNumber, HouseNumberExtension, ZipCode, City, Country)
+     *                   )
      */
     public function getContactInfo()
     {
@@ -301,7 +301,7 @@ class Skarabee
     /**
      * Get the timeout that will be used
      *
-     * @return    int
+     * @return int
      */
     public function getTimeOut()
     {
@@ -312,7 +312,7 @@ class Skarabee
      * Get the useragent that will be used. Our version will be prepended to yours.
      * It will look like: "PHP Skarabee Member/<version> <your-user-agent>"
      *
-     * @return    string
+     * @return string
      */
     public function getUserAgent()
     {
@@ -323,20 +323,20 @@ class Skarabee
      * Set the timeout
      * After this time the request will stop. You should handle any errors triggered by this.
      *
-     * @return    void
-     * @param    int $seconds    The timeout in seconds
+     * @return void
+     * @param  int  $seconds The timeout in seconds
      */
     public function setTimeOut($seconds)
     {
         $this->timeOut = (int) $seconds;
     }
-    
+
     /**
      * Set the user-agent for you application
      * It will be appended to ours, the result will look like: "PHP Skarabee Member/<version> <your-user-agent>"
      *
-     * @return    void
-     * @param    string $userAgent    Your user-agent, it should look like <app-name>/<app-version>
+     * @return void
+     * @param  string $userAgent Your user-agent, it should look like <app-name>/<app-version>
      */
     public function setUserAgent($userAgent)
     {
@@ -347,11 +347,11 @@ class Skarabee
      * Ping to Skarabee.
      *
      * @todo Verify if it works.
-     * @param int $id The PublicationID you have received from Skarabee for a property.
-     * @param int $status The status of the property.
+     * @param int $id                The PublicationID you have received from Skarabee for a property.
+     * @param int $status            The status of the property.
      * @param int $statusDescription The description of the property.
-     * @param int $internalId The ID for this property in our website.
-     * @param int $internalURL The URL for this property in our website.
+     * @param int $internalId        The ID for this property in our website.
+     * @param int $internalURL       The URL for this property in our website.
      */
     public function pingBack($id, $status, $statusDescription = 'description', $internalId, $internalURL)
     {
@@ -383,7 +383,6 @@ class Skarabee
         return $this->doCall('Feedback', $parameters);
     }
 }
-
 
 /**
  * Skarabee Exception class
