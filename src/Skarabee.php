@@ -7,7 +7,7 @@ namespace JeroenDesloovere\Skarabee;
  *
  * This Skarabee PHP Wrapper class connects to the Skarabee SOAP API, called Weblink.
  *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
 class Skarabee
 {
