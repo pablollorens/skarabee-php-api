@@ -11,13 +11,13 @@ namespace JeroenDesloovere\Skarabee;
  */
 class Skarabee
 {
+    // the url for the api
+    const API_URL = 'http://weblink.skarabee.com/weblink.asmx?wsdl';
+
     // internal constant to enable/disable debugging
     const DEBUG = false;
 
-    // the url for the api
-    const WSDL_URL = 'http://weblink.skarabee.com/weblink.asmx?wsdl';
-
-    // current version
+    // current class version
     const VERSION = '1.0.0';
 
     /**
@@ -161,6 +161,11 @@ class Skarabee
         // first time we call SoapClient
         if (!$this->soapClient) {
             try {
+				// throw error
+				if (!extension_loaded('soap')) {
+					throw new SkarabeeException('SOAP needs to be installed.');
+				}
+
                 // throw error
                 if (empty($this->username) && empty($this->password)) {
                     throw new SkarabeeException('Username and password are empty.');
@@ -178,7 +183,7 @@ class Skarabee
                 );
 
                 // define SOAP client
-                $this->soapClient = new SoapClient(self::WSDL_URL, $options);
+                $this->soapClient = new \SoapClient(self::API_URL, $options);
             } catch (Exception $e) {
                 // throw error
                 throw new SkarabeeException($e);
@@ -381,5 +386,31 @@ class Skarabee
 
         // call feedback
         return $this->doCall('Feedback', $parameters);
+    }
+}
+
+
+/**
+ * Skarabee Exception
+ *
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
+ */
+class SkarabeeException extends \Exception
+{
+    // Redefine the exception so message isn't optional
+    public function __construct($message, $code = 0) {
+        // some code
+    
+        // make sure everything is assigned properly
+        parent::__construct($message, $code);
+    }
+
+    // custom string representation of object
+    public function __toString() {
+        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+    }
+
+    public function customFunction() {
+        echo "A custom function for this type of exception\n";
     }
 }

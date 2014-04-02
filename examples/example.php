@@ -8,14 +8,18 @@
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
 
-// require
 require_once __DIR__ . '/../src/JeroenDesloovere/Skarabee/Skarabee.php';
 
 use JeroenDesloovere\Skarabee\Skarabee;
 
 // define credentials
-$username = '';
-$password = '';
+$username = ''; // required
+$password = ''; // required
+
+// username and password are required
+if (empty($username) || empty($password)) {
+	echo 'Please define your username and password.';
+}
 
 // init api
 $api = new Skarabee($username, $password);
@@ -43,7 +47,7 @@ $items = $api->getAll();
 print_r($api->addContactMessage($item));
 */
 
-//print_r($items);
+print_r($items);
 
 // send feedback
 $result = $api->pingBack(2247560, 'AVAILABLE', 'Dit is een test-feedback', '1', 'http://www.eribo.be');
