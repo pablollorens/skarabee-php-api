@@ -1,0 +1,20 @@
+{
+    "name": "deslooverej/skarabee-php-api",
+    "type": "library",
+    "description": "This Skarabee PHP class connects with the Skarabee SOAP API, called Weblink.",
+    "keywords": ["skarabee", "immo", "api", "php"],
+    "homepage": "https://github.com/deslooverej/skarabee-php-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen Desloovere",
+            "email": "jeroen@siesqo.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "Skarabee": "src/JeroenDesloovere/Skarabee/" }
+    }
+}
