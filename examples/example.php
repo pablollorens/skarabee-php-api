@@ -5,21 +5,16 @@
  *
  * This Skarabee PHP Wrapper class connects to the Skarabee SOAP API, called Weblink.
  *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
 
+// add your own credentials in this file
+require_once __DIR__ . '/credentials.php';
+
+// required to load
 require_once __DIR__ . '/../src/JeroenDesloovere/Skarabee/Skarabee.php';
 
 use JeroenDesloovere\Skarabee\Skarabee;
-
-// define credentials
-$username = ''; // required
-$password = ''; // required
-
-// username and password are required
-if (empty($username) || empty($password)) {
-	echo 'Please define your username and password.';
-}
 
 // init api
 $api = new Skarabee($username, $password);
