@@ -17,6 +17,6 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-0": { "Skarabee": "src/JeroenDesloovere/Skarabee/" }
+        "psr-4": { "JeroenDesloovere\\": "src/JeroenDesloovere" }
     }
 }
