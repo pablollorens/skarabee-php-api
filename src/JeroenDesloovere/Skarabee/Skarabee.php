@@ -383,10 +383,3 @@ class Skarabee
         return $this->doCall('Feedback', $parameters);
     }
 }
-
-/**
- * Skarabee Exception class
- *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
- */
-class SkarabeeException extends Exception {}

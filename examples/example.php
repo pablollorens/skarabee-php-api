@@ -9,7 +9,9 @@
  */
 
 // require
-require_once '../src/JeroenDesloovere/Skarabee/Skarabee.php';
+require_once __DIR__ . '/../src/JeroenDesloovere/Skarabee/Skarabee.php';
+
+use JeroenDesloovere\Skarabee\Skarabee;
 
 // define credentials
 $username = '';
