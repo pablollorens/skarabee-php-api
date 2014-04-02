@@ -12,7 +12,7 @@
 require_once __DIR__ . '/credentials.php';
 
 // required to load
-require_once __DIR__ . '/../src/JeroenDesloovere/Skarabee/Skarabee.php';
+require_once __DIR__ . '/../src/Skarabee.php';
 
 use JeroenDesloovere\Skarabee\Skarabee;
 
