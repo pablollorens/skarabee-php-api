@@ -389,7 +389,6 @@ class Skarabee
     }
 }
 
-
 /**
  * Skarabee Exception
  *
