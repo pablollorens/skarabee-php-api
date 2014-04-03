@@ -161,10 +161,10 @@ class Skarabee
         // first time we call SoapClient
         if (!$this->soapClient) {
             try {
-				// throw error
-				if (!extension_loaded('soap')) {
-					throw new SkarabeeException('SOAP needs to be installed.');
-				}
+                // throw error
+                if (!extension_loaded('soap')) {
+                    throw new SkarabeeException('SOAP needs to be installed.');
+                }
 
                 // throw error
                 if (empty($this->username) && empty($this->password)) {
