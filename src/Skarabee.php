@@ -217,6 +217,10 @@ class Skarabee
         // define result
         $result = $this->doCall('GetPublication', $parameters);
 
+        if (isset($result['Errors']['Error'])) {
+            throw new SkarabeeException($result['Errors']['Error']['Message']);
+        }
+
         // return item
         return $result['Publication'];
     }
