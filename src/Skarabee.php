@@ -63,6 +63,10 @@ class Skarabee
      */
     public function __construct($username, $password)
     {
+        if (!$username || !$password) {
+            throw new SkarabeeException('Missing username or password');
+        }
+
         // define variables
         $this->username = $username;
         $this->password = $password;
@@ -164,11 +168,6 @@ class Skarabee
                 // throw error
                 if (!extension_loaded('soap')) {
                     throw new SkarabeeException('SOAP needs to be installed.');
-                }
-
-                // throw error
-                if (empty($this->username) && empty($this->password)) {
-                    throw new SkarabeeException('Username and password are empty.');
                 }
 
                 // define options
